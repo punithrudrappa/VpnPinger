@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">VPN Pinger</string>
+
+    <!-- Setup screen -->
+    <string name="screen_intro">VPN Pinger\n\nCalls your URL every time the device\'s VPN connects, disconnects, or switches servers. You can additionally have it call the URL on a fixed schedule (see the periodic interval field). The monitor keeps running in the background as a foreground service (persistent notification) and auto-starts after every boot.</string>
+
+    <string name="url_label">URL to call when the VPN status changes:</string>
+    <string name="url_hint">https://example.com/webhook</string>
+
+    <string name="delay_label">Wait this many seconds after a VPN change before calling the URL:</string>
+    <string name="delay_hint">3</string>
+
+    <string name="periodic_label">Also call this URL periodically, every this many seconds (0 = off):</string>
+    <string name="periodic_hint">0</string>
+
+    <string name="save_settings">Save settings</string>
+    <string name="start_monitor">Start / restart monitor</string>
+    <string name="stop_monitor">Stop monitor</string>
+    <string name="ping_now">Ping now (test URL)</string>
+    <string name="ignore_battery">Ignore battery optimizations</string>
+
+    <string name="enter_url_first">Enter a URL first</string>
+    <string name="delay_invalid">Delay must be a whole number between 0 and 3600 seconds.</string>
+    <string name="periodic_invalid">Interval must be a whole number of seconds between 0 and 86400 (24 h). Use 0 to turn periodic pings off.</string>
+    <string name="settings_saved">Settings saved and applied.</string>
+    <string name="ping_now_started">Manual ping sent — the result arrives as a notification.</string>
+    <string name="monitor_started">Monitor started (see the ongoing notification).</string>
+    <string name="monitor_stopped">Monitor stopped.</string>
+    <string name="battery_settings_error">Could not open battery settings: %1$s</string>
+
+    <!-- Runtime status lines -->
+    <string name="status_line">%1$s\n%2$s\n%3$s\n%4$s\n%5$s</string>
+    <string name="status_saved_url">Saved URL: %1$s</string>
+    <string name="status_delay">Delay before URL call: %1$d s</string>
+    <string name="status_periodic">Periodic URL call: %1$s</string>
+    <string name="status_battery">Battery optimization: %1$s</string>
+    <string name="status_battery_ok">ignored (good)</string>
+    <string name="status_battery_active">active — tap the button above to whitelist</string>
+    <string name="status_notifications">Notifications permission: %1$s</string>
+    <string name="status_notifications_granted">granted</string>
+    <string name="status_notifications_denied">NOT granted — VPN-change alerts won\'t be shown</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pre-Android 12 equivalent of data_extraction_rules.xml: never back up app data
+  (the stored URL is user-specific; the app is configured fresh on each device).
+  Only relevant on API 26-30; android:dataExtractionRules handles API 31+.
+-->
+<full-backup-content>
+    <exclude domain="root" path="." />
+</full-backup-content>

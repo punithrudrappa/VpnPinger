@@ -1,0 +1,21 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Machine-specific configuration (never commit; Android Studio regenerates it)
+local.properties
+
+# IDE
+.idea/
+*.iml
+.kotlin/
+
+# Android
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Secrets & logs
+*.keystore
+*.log

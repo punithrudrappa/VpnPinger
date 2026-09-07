@@ -1,0 +1,56 @@
+name: Release APK
+
+# Creates a GitHub Release with an installable APK whenever a version tag
+# (e.g. v1.0.0) is pushed. Uses the debug APK: it is auto-signed with the debug
+# key, installs on any device, and is fine for personal or small-scale
+# distribution. (For wide public distribution a proper release-signing setup is
+# recommended instead — see the README.)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write # allow creating the Release and uploading the APK
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Android SDK components
+        run: |
+          # sdkmanager is not on PATH by default on GitHub runners; look for it
+          # under the standard cmdline-tools locations instead.
+          SDKMANAGER="${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager"
+          [ -x "$SDKMANAGER" ] || SDKMANAGER="${ANDROID_HOME}/cmdline-tools/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then
+            echo "::warning::sdkmanager not found; assuming SDK components are already installed under $ANDROID_HOME"
+            exit 0
+          fi
+          yes | "$SDKMANAGER" --licenses > /dev/null 2>&1 || true
+          "$SDKMANAGER" "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Build debug APK
+        run: ./gradlew :app:assembleDebug --no-daemon
+
+      - name: Name the APK after the tag
+        run: cp app/build/outputs/apk/debug/app-debug.apk "VpnPinger-${GITHUB_REF_NAME}.apk"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: VpnPinger-*.apk
+          generate_release_notes: true
