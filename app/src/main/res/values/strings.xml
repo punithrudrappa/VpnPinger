@@ -25,6 +25,7 @@
     <string name="settings_saved">Settings saved and applied.</string>
     <string name="ping_now_started">Manual ping sent — the result arrives as a notification.</string>
     <string name="monitor_started">Monitor started (see the ongoing notification).</string>
+    <string name="start_monitor_started">Monitor started and a ping was sent (see the notifications).</string>
     <string name="monitor_stopped">Monitor stopped.</string>
     <string name="battery_settings_error">Could not open battery settings: %1$s</string>
 

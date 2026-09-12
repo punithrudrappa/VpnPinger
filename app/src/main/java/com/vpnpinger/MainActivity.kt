@@ -94,8 +94,12 @@ class MainActivity : Activity() {
 
         val startButton = Button(this).apply { text = getString(R.string.start_monitor) }
         startButton.setOnClickListener {
-            MonitorService.start(this)
-            toast(R.string.monitor_started)
+            // In addition to starting/restarting the monitor, also fire an immediate
+            // manual ping of the URL. pingNow starts the service through the exact
+            // same path as start (so the monitor still (re)starts), and additionally
+            // delivers the ACTION_PING_NOW action that triggers the ping.
+            MonitorService.pingNow(this)
+            toast(R.string.start_monitor_started)
         }
 
         val stopButton = Button(this).apply { text = getString(R.string.stop_monitor) }
